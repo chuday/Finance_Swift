@@ -241,7 +241,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF9-BO-inM">
                                 <rect key="frame" x="20" y="173" width="169" height="298"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лимит в месяц:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wqr-gi-o9s">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лимит:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wqr-gi-o9s">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="20.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.62387240659999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -283,6 +283,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="установить лимит">
                                             <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="limitPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EJa-bt-Ieh"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDq-mI-TYf">
                                         <rect key="frame" x="0.0" y="142.5" width="169" height="20.5"/>
@@ -454,10 +457,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xgy-A9-4Q2">
-                                        <rect key="frame" x="246" y="0.0" width="55" height="87.5"/>
+                                        <rect key="frame" x="246" y="0.0" width="50" height="87.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-PX-U7u">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Nws-yJ-M41"/>
                                                     <constraint firstAttribute="width" secondItem="hy9-PX-U7u" secondAttribute="height" multiplier="1:1" id="QtK-If-LUe"/>
@@ -473,7 +476,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZQ-Er-PQi">
-                                                <rect key="frame" x="0.0" y="55" width="55" height="32.5"/>
+                                                <rect key="frame" x="0.0" y="50" width="50" height="37.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="авто">
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
@@ -482,10 +485,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jbI-vW-gg8">
-                                        <rect key="frame" x="304" y="0.0" width="70" height="87.5"/>
+                                        <rect key="frame" x="312" y="0.0" width="62" height="87.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLm-jA-alc">
-                                                <rect key="frame" x="0.0" y="0.0" width="70" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="62" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="fT7-Vz-A9h"/>
                                                     <constraint firstAttribute="width" secondItem="XLm-jA-alc" secondAttribute="height" multiplier="31:25" id="qna-Y2-7IQ"/>
@@ -501,7 +504,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-Xh-BA6">
-                                                <rect key="frame" x="0.0" y="56.5" width="70" height="31"/>
+                                                <rect key="frame" x="0.0" y="50" width="62" height="37.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="красота">
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
@@ -547,6 +550,9 @@
                     <navigationItem key="navigationItem" title="Money" id="ysz-M3-bVm"/>
                     <connections>
                         <outlet property="displayLabel" destination="v9l-Oc-Stp" id="zCt-dn-N8s"/>
+                        <outlet property="howMoneyCanSpend" destination="L5Q-BX-8e7" id="FkR-hh-X5m"/>
+                        <outlet property="limitLabel" destination="mGN-ys-DnY" id="Uml-hl-r4F"/>
+                        <outlet property="spendByCheck" destination="qDq-mI-TYf" id="dfP-Xo-ZL3"/>
                         <outlet property="tableView" destination="Zb5-je-qoJ" id="PTI-du-wZG"/>
                         <outletCollection property="numberFromKeyboards" destination="x4q-Ni-Wbs" collectionClass="NSMutableArray" id="aWH-a8-uAa"/>
                         <outletCollection property="numberFromKeyboards" destination="UL4-hl-SgC" collectionClass="NSMutableArray" id="uUr-LC-7BN"/>
