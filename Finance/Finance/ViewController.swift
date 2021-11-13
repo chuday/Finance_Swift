@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var limitLabel: UILabel!
     @IBOutlet weak var howMoneyCanSpend: UILabel!
     @IBOutlet weak var spendByCheck: UILabel!
+    @IBOutlet weak var allSpending: UILabel!
     
     @IBOutlet weak var displayLabel: UILabel!
     
@@ -39,6 +40,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         spendingArray = realm.objects(Spending.self)
+        leftLabels()
+        spendingAllTime()
     }
     
     @IBAction func numberPressed(_ sender: UIButton) {
@@ -77,6 +80,8 @@ class ViewController: UIViewController {
             print("File realm: \(realm.configuration.fileURL)")
             
         }
+        leftLabels()
+        spendingAllTime()
         tableView.reloadData()
     }
     
@@ -88,11 +93,12 @@ class ViewController: UIViewController {
         let alertInstall = UIAlertAction(title: "Установить", style: .default) { action in
             
             let textFieldSum = alertController.textFields?[0].text
-            self.limitLabel.text = textFieldSum
             
             let textFieldDate = alertController.textFields?[1].text
             
-            guard textFieldDate != "" else { return }
+            guard textFieldDate != "" && textFieldSum != "" else { return }
+            
+            self.limitLabel.text = textFieldSum
             
             if let day = textFieldDate {
                 let dateNow = Date()
@@ -116,6 +122,7 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            self.leftLabels()
         }
         
         alertController.addTextField { (money) in
@@ -135,6 +142,85 @@ class ViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func leftLabels() {
+        
+        let limit = self.realm.objects(Limit.self)
+        
+        guard limit.isEmpty == false else { return }
+                
+        limitLabel.text = limit[0].limitSum
+        
+        let calendar = Calendar.current
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
+        let firstDay = limit[0].limitDate as Date
+        let lastDay = limit[0].limitLastDay as Date
+        
+        let firstComponents = calendar.dateComponents([.year, .month, .day], from: firstDay)
+        let lastComponents = calendar.dateComponents([.year, .month, .day], from: lastDay)
+        
+        let startDate = formatter.date(from: "\(firstComponents.year!)/\(firstComponents.month!)/\(firstComponents.day!) 00:00") as Any
+        let endDate = formatter.date(from: "\(lastComponents.year!)/\(lastComponents.month!)/\(lastComponents.day!) 23:59") as Any
+        
+        let filtredLimit: Int = realm.objects(Spending.self).filter("self.date >= %@ && self.date <= %@", startDate, endDate).sum(ofProperty: "cost")
+        
+        spendByCheck.text = "\(filtredLimit)"
+        
+        let a = Int(limitLabel.text!)!
+        let b = Int(spendByCheck.text!)!
+        let c = a - b
+        
+        howMoneyCanSpend.text = "\(c)"
+        
+        // расходы за месяц
+/*
+        let dateNow = Date()
+        
+        let dateComponentsNow = calendar.dateComponents([.year, .month, .day], from: dateNow)
+        
+        let lastDayMonth: Int
+        if Int(dateComponentsNow.year!) % 4 == 0 && dateComponentsNow.month == 2 {
+            lastDayMonth = 29
+            
+        } else {
+            switch dateComponentsNow.month {
+            case 1: lastDayMonth = 31
+            case 2: lastDayMonth = 28
+            case 3: lastDayMonth = 31
+            case 4: lastDayMonth = 30
+            case 5: lastDayMonth = 31
+            case 6: lastDayMonth = 31
+            case 7: lastDayMonth = 31
+            case 8: lastDayMonth = 31
+            case 9: lastDayMonth = 30
+            case 10: lastDayMonth = 31
+            case 11: lastDayMonth = 30
+            case 12: lastDayMonth = 31
+                
+            default: return
+                
+            }
+        }
+        
+        let startDateMonth = formatter.date(from: "\(dateComponentsNow.year!)/\(dateComponentsNow.month!)/01 00:00") as Any
+        let endDateMonth = formatter.date(from: "\(dateComponentsNow.year!)/\(dateComponentsNow.month!)/\(lastDayMonth) 23:59") as Any
+        
+        let filtredMonth: Int = realm.objects(Spending.self).filter("self.date >= %@ && self.date <= %@", startDateMonth, endDateMonth).sum(ofProperty: "cost")
+        
+        print(filtredMonth)
+*/
+        
+    }
+
+    
+    func spendingAllTime() {
+        
+        let allSpend: Int = realm.objects(Spending.self).sum(ofProperty: "cost")
+        allSpending.text = "\(allSpend)"
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -147,6 +233,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
         let spending = spendingArray.reversed()[indexPath.row]
+//        let spending = spendingArray.sorted(byKeyPath: "date", ascending: false)[indexPath.row]
+
         
         cell.recordCategory.text = spending.category
         cell.recordCost.text = "\(spending.cost)"
@@ -169,15 +257,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editingRow = spendingArray.reversed()[indexPath.row]
+//        let editingRow = spendingArray.sorted(byKeyPath: "date", ascending: false)[indexPath.row]
+
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "удалить") { (_, _) in
             try! self.realm.write{
                 self.realm.delete(editingRow)
+                self.leftLabels()
+                self.spendingAllTime()
                 tableView.reloadData()
             }
         }
         
         return [deleteAction]
-        
     }
 }

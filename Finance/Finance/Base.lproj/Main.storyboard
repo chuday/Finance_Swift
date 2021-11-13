@@ -457,10 +457,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xgy-A9-4Q2">
-                                        <rect key="frame" x="246" y="0.0" width="50" height="87.5"/>
+                                        <rect key="frame" x="246" y="0.0" width="55" height="87.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy9-PX-U7u">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Nws-yJ-M41"/>
                                                     <constraint firstAttribute="width" secondItem="hy9-PX-U7u" secondAttribute="height" multiplier="1:1" id="QtK-If-LUe"/>
@@ -476,7 +476,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZQ-Er-PQi">
-                                                <rect key="frame" x="0.0" y="50" width="50" height="37.5"/>
+                                                <rect key="frame" x="0.0" y="55" width="55" height="32.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="авто">
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
@@ -485,10 +485,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jbI-vW-gg8">
-                                        <rect key="frame" x="312" y="0.0" width="62" height="87.5"/>
+                                        <rect key="frame" x="304" y="0.0" width="70" height="87.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLm-jA-alc">
-                                                <rect key="frame" x="0.0" y="0.0" width="62" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="56.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="fT7-Vz-A9h"/>
                                                     <constraint firstAttribute="width" secondItem="XLm-jA-alc" secondAttribute="height" multiplier="31:25" id="qna-Y2-7IQ"/>
@@ -504,7 +504,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVS-Xh-BA6">
-                                                <rect key="frame" x="0.0" y="50" width="62" height="37.5"/>
+                                                <rect key="frame" x="0.0" y="56.5" width="70" height="31"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="красота">
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="9"/>
@@ -549,6 +549,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Money" id="ysz-M3-bVm"/>
                     <connections>
+                        <outlet property="allSpending" destination="1qi-9e-aV1" id="z1o-QV-YUF"/>
                         <outlet property="displayLabel" destination="v9l-Oc-Stp" id="zCt-dn-N8s"/>
                         <outlet property="howMoneyCanSpend" destination="L5Q-BX-8e7" id="FkR-hh-X5m"/>
                         <outlet property="limitLabel" destination="mGN-ys-DnY" id="Uml-hl-r4F"/>
