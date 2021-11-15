@@ -1,1 +1,1 @@
-# Finance
+# Accounting of finance
